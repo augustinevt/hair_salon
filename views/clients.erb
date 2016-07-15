@@ -1,25 +1,40 @@
-<h1>clients</h1>
+
+<div class="container">
+
+<a href="/">Home</a>
+
+<h1 class='very-big'>Clients</h1>
 
 
 <ul>
   <%@clients.each do |client|%>
-    <li><a href="/client/<%=client.id()%>"><%= client.name %></a></li>
+    <div class="jumbotron">
+      <h1><a href="/client/<%=client.id()%>"><%= client.name %></a></h1>
+    </div>
   <%end%>
 </ul>
 
-<form class="" action="/clients" method="post">
-  <label for="name">Name
-    <input type="text" name="name" value="">
-  </label>
-  <label for="phone">phone
-    <input type="text" name="phone" value="">
-  </label>
-
-  <select class="" name="stylist_id">
-    <% @stylists.each do |stylist| %>
+<div class="well">
+  <h2>Add a new client</h2>
+  <form class="form" action="/clients" method="post">
+    <div class="form-group">
+      <label for="name">Name
+        <input type="text" name="name" value="">
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="phone">phone
+        <input type="text" name="phone" value="">
+      </label>
+    </div>
+    <select class="" name="stylist_id">
+      <% @stylists.each do |stylist| %>
       <option value=" <%= stylist.id() %>">  <%=stylist.name %> </option>
-    <%end%>
-  </select>
+      <%end%>
+    </select>
 
-  <button type="submit" name="button">Add Client</button>
-</form>
+    <button type="submit" name="button">Add Client</button>
+  </form>
+</div>
+
+</div>

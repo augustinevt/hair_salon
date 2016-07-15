@@ -1,15 +1,26 @@
-<h1>stylists</h1>
+<a href="/">Home</a>
+<h1>Stylists</h1>
 
-<%@stylists.each do |stylist|%>
- <a href="/stylist/<%=stylist.id()%>"><%= stylist.name %></a>
-<%end%>
-
-<form class="" action="/stylists" method="post">
-  <label for="name">Name
-    <input type="text" name="name" value="">
-  </label>
-  <label for="rate">Rate
-    <input type="text" name="rate" value="">
-  </label>
-  <button type="submit" name="button">Add Stylist</button>
-</form>
+<div class="jumbotron">
+  <%@stylists.each do |stylist|%>
+  <h1><a href="/stylist/<%=stylist.id()%>"><%= stylist.name %></a></h1>
+  <%end%>
+</div>
+<div class="container">
+  <h1>Add a new stylist!</h1>
+  <div class="well">
+    <form class="form" action="/stylists" method="post">
+      <div class="form-group">
+        <label for="name">Name
+          <input type="text" name="name" value="">
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="rate">Rate
+          <input type="text" name="rate" value="">
+        </label>
+      </div>
+      <button class="btn btn-info" type="submit" name="button">Add Stylist</button>
+    </form>
+  </div>
+</div>
