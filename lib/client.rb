@@ -27,7 +27,6 @@ class Client
     self.id() == other_client.id() && self.name() == other_client.name()
   end
 
-
   def self.find_by_id(id)
     result = DB.exec("SELECT * FROM clients WHERE id = #{id}").first
     Client.new({ name: result['name'], phone: result['phone'], stylist_id: result['stylist_id'].to_i(), id: result['id'].to_i() })
@@ -47,10 +46,6 @@ class Client
 
   def delete
     DB.exec("DELETE FROM clients WHERE id = #{@id};")
-  end
-
-  def find_stylist()
-    result = DB.exec("SELECT id FROM stylists WHERE id = #{@stylist_id};").first
   end
 
 end

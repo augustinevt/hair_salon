@@ -12,10 +12,6 @@ get('/') do
   erb(:index)
 end
 
-
-
-
-
 get('/clients') do
   @clients = Client.all()
   @stylists = Stylist.all()
@@ -28,13 +24,6 @@ post ('/clients') do
   @stylists = Stylist.all()
   erb(:clients)
 end
-
-
-
-
-
-
-
 
 get ('/client/:id') do
   @client = Client.find_by_id(params[:id])
@@ -55,12 +44,6 @@ delete ('/client/:id') do
   redirect '/clients'
 end
 
-
-
-
-
-
-
 get('/stylists') do
   @stylists = Stylist.all()
   erb(:stylists)
@@ -71,12 +54,6 @@ post ('/stylists') do
   @stylists = Stylist.all()
   erb(:stylists)
 end
-
-
-
-
-
-
 
 get ('/stylist/:id') do
   @stylist = Stylist.find_by_id(params[:id])
