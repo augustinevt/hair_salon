@@ -13,10 +13,8 @@ this application allows a salon manager to create, edit and delete stylists in r
 * Go to [github](https://github.com/augustinevt/hair_salon) and clone the repository
 * Make sure you have all the gem dependencies bundled before running the app locally!
 
-## database Setup
-Please set up your database like this:
+In psql:
 * CREATE DATABASE hair_salon;
-* CREATE DATABASE hair_salon_test;
 * CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, rate varchar);
 * CREATE TABLE clients (id serial PRIMARY KEY, name varchar, phone varchar, stylist_id int);
 
