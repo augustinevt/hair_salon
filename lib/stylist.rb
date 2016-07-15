@@ -10,20 +10,40 @@ class Stylist
 
   def save
     returned_id = DB.exec("INSERT INTO stylists (name, rate) VALUES ('#{@name}', '#{@rate}') RETURNING id;")
-    @id = returned_id.first['id']
+    @id = returned_id.first['id'].to_i
   end
 
   def self.all()
     db_results = DB.exec("SELECT * FROM stylists")
     stylists = []
     db_results.each do |result|
-      stylists.push( Stylist.new({ name: result['name'], rate: result['rate'], id: result['id'] }))
+      stylists.push( Stylist.new({ name: result['name'], rate: result['rate'], id: result['id'].to_i }))
     end
     stylists
   end
 
   def ==(other_stylist)
     self.id() == other_stylist.id() && self.name() == other_stylist.name()
+  end
+
+
+  def self.find_by_id(id)
+    result = DB.exec("SELECT * FROM stylists WHERE id = #{id}").first
+    Stylist.new({ name: result['name'], rate: result['rate'], id: result['id'].to_i })
+  end
+
+  def update(attr)
+    attr.each do |col_name, value|
+      if value.kind_of?(String)
+        DB.exec("UPDATE stylists SET #{col_name} = '#{value}' WHERE id = #{@id};")
+      else
+        DB.exec("UPDATE stylists SET #{col_name} = #{value} WHERE id = #{@id};")
+      end
+    end
+  end
+
+  def delete
+    DB.exec("DELETE FROM stylists WHERE id = #{@id};")
   end
 
 end
