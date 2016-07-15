@@ -1,8 +1,11 @@
 <h1>clients</h1>
 
-<%@clients.each do |client|%>
- <a href="/client/<%=client.id()%>"><%= client.name %></a>
-<%end%>
+
+<ul>
+  <%@clients.each do |client|%>
+    <li><a href="/client/<%=client.id()%>"><%= client.name %></a></li>
+  <%end%>
+</ul>
 
 <form class="" action="/clients" method="post">
   <label for="name">Name
