@@ -17,10 +17,15 @@ end
 
 
 get('/clients') do
+  @clients = Client.all()
+  @stylists = Stylist.all()
   erb(:clients)
 end
 
 post ('/clients') do
+  Client.new({name: params['name'], phone: params['phone'], stylist_id: params['stylist_id'].to_i}).save()
+  @clients = Client.all()
+  @stylists = Stylist.all()
   erb(:clients)
 end
 
@@ -32,19 +37,22 @@ end
 
 
 get ('/client/:id') do
+  @client = Client.find_by_id(params[:id])
+  @stylists = Stylist.all()
   erb(:client)
 end
 
-post ('/client/:id') do
-  erb(:client)
-end
 
 patch ('/client/:id') do
+  @client = Client.find_by_id(params[:id])
+  @client = @client.update({name: params['name'], phone: params['phone'], stylist_id: params['stylist_id'].to_i})
+  @stylists = Stylist.all()
   erb(:client)
 end
 
 delete ('/client/:id') do
-  erb(:client)
+  @client = Client.find_by_id(params[:id]).delete()
+  redirect '/clients'
 end
 
 
@@ -54,10 +62,13 @@ end
 
 
 get('/stylists') do
+  @stylists = Stylist.all()
   erb(:stylists)
 end
 
 post ('/stylists') do
+  Stylist.new({name: params['name'], rate: params['rate'], id: nil}).save()
+  @stylists = Stylist.all()
   erb(:stylists)
 end
 
@@ -68,6 +79,8 @@ end
 
 
 get ('/stylist/:id') do
+  @stylist = Stylist.find_by_id(params[:id])
+  @clients = @stylist.find_clients()
   erb(:stylist)
 end
 
@@ -76,9 +89,12 @@ post ('/stylist/:id') do
 end
 
 patch ('/stylist/:id') do
+  @stylist = Stylist.find_by_id(params[:id]).update({name: params['name'], rate: params['rate']})
+  @clients = @stylist.find_clients()
   erb(:stylist)
 end
 
 delete ('/stylist/:id') do
-  erb(:stylist)
+  @stylist = Stylist.find_by_id(params[:id]).delete()
+  redirect '/stylists'
 end

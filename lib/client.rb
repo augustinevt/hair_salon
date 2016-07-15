@@ -41,10 +41,16 @@ class Client
         DB.exec("UPDATE clients SET #{col_name} = #{value} WHERE id = #{@id};")
       end
     end
+    result = DB.exec("SELECT * FROM clients WHERE id = #{id}").first
+    Client.new({ name: result['name'], phone: result['phone'], stylist_id: result['stylist_id'].to_i(), id: result['id'].to_i() })
   end
 
   def delete
     DB.exec("DELETE FROM clients WHERE id = #{@id};")
+  end
+
+  def find_stylist()
+    result = DB.exec("SELECT id FROM stylists WHERE id = #{@stylist_id};").first
   end
 
 end

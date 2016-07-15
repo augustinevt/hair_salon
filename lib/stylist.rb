@@ -29,7 +29,7 @@ class Stylist
 
   def self.find_by_id(id)
     result = DB.exec("SELECT * FROM stylists WHERE id = #{id}").first
-    Stylist.new({ name: result['name'], rate: result['rate'], id: result['id'].to_i })
+    Stylist.new({ name: result['name'], rate: result['rate'], id: result['id'].to_i }) || {rate: "NONE"}
   end
 
   def update(attr)
@@ -40,6 +40,17 @@ class Stylist
         DB.exec("UPDATE stylists SET #{col_name} = #{value} WHERE id = #{@id};")
       end
     end
+    result = DB.exec("SELECT * FROM stylists WHERE id = #{@id}").first
+    Stylist.new({ name: result['name'], rate: result['rate'], id: result['id'].to_i })
+  end
+
+  def find_clients
+    db_results =DB.exec("SELECT * FROM clients WHERE stylist_id = #{@id}");
+    clients = []
+    db_results.each do |result|
+      clients.push( Client.new({ name: result['name'], phone: result['phone'], stylist_id: result['stylist_id'].to_i(), id: result['id'].to_i() }))
+    end
+    clients
   end
 
   def delete

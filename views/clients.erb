@@ -1,1 +1,22 @@
 <h1>clients</h1>
+
+<%@clients.each do |client|%>
+ <a href="/client/<%=client.id()%>"><%= client.name %></a>
+<%end%>
+
+<form class="" action="/clients" method="post">
+  <label for="name">Name
+    <input type="text" name="name" value="">
+  </label>
+  <label for="phone">phone
+    <input type="text" name="phone" value="">
+  </label>
+
+  <select class="" name="stylist_id">
+    <% @stylists.each do |stylist| %>
+      <option value=" <%= stylist.id() %>">  <%=stylist.name %> </option>
+    <%end%>
+  </select>
+
+  <button type="submit" name="button">Add Client</button>
+</form>

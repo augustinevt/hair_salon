@@ -3,7 +3,10 @@ require 'rspec'
 require 'capybara/rspec'
 require 'stylist'
 require 'client'
+require './app.rb'
 
+Capybara.app = Sinatra::Application
+set :show_exceptions, false
 
 DB = PG.connect({dbname: "hair_salon_test"})
 

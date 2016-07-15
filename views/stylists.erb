@@ -1,1 +1,15 @@
 <h1>stylists</h1>
+
+<%@stylists.each do |stylist|%>
+ <a href="/stylist/<%=stylist.id()%>"><%= stylist.name %></a>
+<%end%>
+
+<form class="" action="/stylists" method="post">
+  <label for="name">Name
+    <input type="text" name="name" value="">
+  </label>
+  <label for="rate">Rate
+    <input type="text" name="rate" value="">
+  </label>
+  <button type="submit" name="button">Add Stylist</button>
+</form>
