@@ -6,7 +6,7 @@ require './lib/client'
 require './lib/stylist'
 also_reload './lib/**/*.rb'
 
-DB = PG.connect({dbname: 'hair_salon_test'})
+DB = PG.connect({dbname: 'hair_salon'})
 
 get('/') do
   erb(:index)
